@@ -10,3 +10,4 @@
 // TODO: on engineer, question for name, id, email, github username, then return
 // TODO: on intern, name, id, email, school, then return
 // TODO: on finish team, exit terminal application and html is generated
+// TODO: add validation to ensure user inputs are correctly formatted

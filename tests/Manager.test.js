@@ -19,3 +19,9 @@ test("Can get office number via getOffice()", () => {
   const e = new Manager("Foo", 1, "test@test.com", testValue);
   expect(e.getOfficeNumber()).toBe(testValue);
 });
+
+test("Get name", () => {
+  const testValue = "Bill";
+  const e = new Manager("Bill", 1, "test@test.com", testValue);
+  expect(e.getName()).toBe(testValue);
+});

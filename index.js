@@ -12,7 +12,7 @@ const employees = [];
 function newEmployee() {
     return inquirer.prompt([
         {
-            type:'list',
+            type: 'list',
             name: 'position',
             message: "What is the employee's positon?",
             choices: [
@@ -22,22 +22,22 @@ function newEmployee() {
             ]
         },
         {
-            type:'input',
+            type: 'input',
             name: 'name',
             message: "What is the employee's name?",
         },
         {
-            type:'input',
+            type: 'input',
             name: 'id',
             message: 'What is their id?',
         },
         {
-            type:'input',
+            type: 'input',
             name: 'email',
             message: 'What is their email?',
         },
-    ]).then(({position, name, id, email}) => {
-        switch(position) {
+    ]).then(({ position, name, id, email }) => {
+        switch (position) {
             case 'Manager':
                 inquirer.prompt([
                     {
@@ -45,7 +45,7 @@ function newEmployee() {
                         name: 'officeNumber',
                         message: 'What is their office number?',
                     }
-                ]).then(({officeNumber}) => {
+                ]).then(({ officeNumber }) => {
                     employees.push(new Manager(name, id, email, officeNumber))
                     another()
                 });
@@ -57,7 +57,7 @@ function newEmployee() {
                         name: 'school',
                         message: 'What is their school name?',
                     }
-                ]).then(({school}) => {
+                ]).then(({ school }) => {
                     employees.push(new Intern(name, id, email, school))
                     another()
                 });
@@ -69,7 +69,7 @@ function newEmployee() {
                         name: 'github',
                         message: 'What is their github?',
                     }
-                ]).then(({github}) => {
+                ]).then(({ github }) => {
                     employees.push(new Engineer(name, id, email, github))
                     another()
                 });
@@ -86,19 +86,20 @@ function another() {
             name: 'more',
             message: 'Would you like to create another employee card?'
         }
-    ]).then(({more}) => {
+    ]).then(({ more }) => {
         if (more) {
             newEmployee();
         } else {
             renderHTML();
-            return console.log(employees)
+            // return console.log(employees)
         }
     })
 }
 
 function renderHTML() {
+    console.log(employees)
     fs.writeFileSync('./index.html',
-    `<!DOCTYPE html>
+        `<!DOCTYPE html>
     <html lang="en-US">
     
       <head>
@@ -110,31 +111,40 @@ function renderHTML() {
     
       <body>
         <header>
-          <h1 class="border bg-info border-dark rounded text-center" style="height: 120px;">Team Profiles</h1>
+          <h1 class="pt-4 border bg-info border-dark rounded text-center" style="height: 120px;">Team Profiles</h1>
         </header>
 
         <main>
     <ul class="d-flex justify-content-around">
-    ${employees.map(employee => 
-        `<li>
-            <div class="card rounded" style="width: 18rem">
-                <h3 class="card-title">${employee.getName()}</h3>
-                <p class="card-subtitle mb-2 text-mute">${employee.getRole()}</p>
-                <p>${employee.getId()}</p>
-                <a href='mailto:${employee.getEmail()}'>${employee.getEmail()}</a>
-            </div>
-        </li>`
-        )}
+        ${makeCard()}
     </ul>
     </main>
     </body>
   
   </html>
   <h2>`
-)}
+    )
+}
+
+function makeCard() {
+    let card = "";
+    // const newEmployees = 
+    employees.forEach(employee => {
+        console.log(employee)
+        card += `<li>
+            <div class="card rounded" style="width: 18rem">
+                <h3 class="card-title">${employee.getName()}</h3>
+                <p class="card-subtitle mb-2 text-mute">${employee.getRole()}</p>
+                <p>${employee.getId()}</p>
+                <a href='mailto:${employee.getEmail()}'>${employee.getEmail()}</a>
+                <p>${employee.getSchool ? employee.getSchool() : employee.getGithub ? employee.getGithub() : employee.getOfficeNumber()}</p>
+            </div>
+        </li>
+        `
+        // return card
+    })
+    // console.log(newEmployees)
+    return card
+}
 
 newEmployee()
-
-{/* <p>${employee.getSchool()}</p>
-<a href='https://github.com/${employee.getGithub()}'>${employee.getGithub()}</a>
-<p>${employee.getOfficeNumber()}</p> */}

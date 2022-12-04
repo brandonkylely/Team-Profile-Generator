@@ -98,20 +98,40 @@ function another() {
 
 function renderHTML() {
     fs.writeFileSync('./index.html',
-    `<ul>
+    `<!DOCTYPE html>
+    <html lang="en-US">
+    
+      <head>
+        <meta charset="UTF-8">
+        <title>Team Profiles</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./style.css">
+      </head>
+    
+      <body>
+        <header>
+          <h1 class="border bg-info border-dark rounded text-center" style="height: 120px;">Team Profiles</h1>
+        </header>
+
+        <main>
+    <ul class="d-flex justify-content-around">
     ${employees.map(employee => 
         `<li>
-            <div>
-                <h2>${employee.getName()}</h2>
-                <p>${employee.getRole()}</p>
+            <div class="card rounded" style="width: 18rem">
+                <h3 class="card-title">${employee.getName()}</h3>
+                <p class="card-subtitle mb-2 text-mute">${employee.getRole()}</p>
                 <p>${employee.getId()}</p>
                 <a href='mailto:${employee.getEmail()}'>${employee.getEmail()}</a>
             </div>
         </li>`
         )}
-    </ul>`
-    )
-}
+    </ul>
+    </main>
+    </body>
+  
+  </html>
+  <h2>`
+)}
 
 newEmployee()
 

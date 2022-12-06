@@ -137,7 +137,7 @@ function makeCard() {
                 <p class="card-subtitle mb-2 text-mute">Role: ${employee.getRole()}</p>
                 <p>ID: ${employee.getId()}</p>
                 <a href='mailto:${employee.getEmail()}'>Email: ${employee.getEmail()}</a>
-                <p>${employee.getSchool ? employee.getSchool() : employee.getGithub ? employee.getGithub() : employee.getOfficeNumber()}</p>
+                <p>${employee.getSchool ? employee.getSchoolLabeled() : employee.getGithub ? employee.getGithubLink() : employee.getOfficeNumberLabeled()}</p>
             </div>
         </li>
         `

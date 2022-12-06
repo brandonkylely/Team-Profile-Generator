@@ -8,7 +8,7 @@ const fs = require('fs');
 const Employee = require('./lib/Employee');
 const employees = [];
 
-//TODO - write your inquirer app here to gather information about the team members, and generate the HTML file using fs
+
 function newEmployee() {
     return inquirer.prompt([
         {
@@ -109,13 +109,13 @@ function renderHTML() {
         <link rel="stylesheet" href="./style.css">
       </head>
     
-      <body>
+      <body class="bg-secondary">
         <header>
-          <h1 class="pt-4 border bg-info border-dark rounded text-center" style="height: 120px;">Team Profiles</h1>
+          <h1 class="pt-4 border bg-info border-dark rounded text-center text-dark"  style="height: 120px;">Team Profiles</h1>
         </header>
 
         <main>
-    <ul class="d-flex justify-content-around">
+    <ul class="d-flex justify-content-around" style="list-style-type: none">
         ${makeCard()}
     </ul>
     </main>
@@ -132,11 +132,11 @@ function makeCard() {
     employees.forEach(employee => {
         console.log(employee)
         card += `<li>
-            <div class="card rounded" style="width: 18rem">
-                <h3 class="card-title">${employee.getName()}</h3>
-                <p class="card-subtitle mb-2 text-mute">${employee.getRole()}</p>
-                <p>${employee.getId()}</p>
-                <a href='mailto:${employee.getEmail()}'>${employee.getEmail()}</a>
+            <div class="card rounded text-info bg-dark bg-opacity-25" style="width: 18rem">
+                <h3 class="card-title">Name: ${employee.getName()}</h3>
+                <p class="card-subtitle mb-2 text-mute">Role: ${employee.getRole()}</p>
+                <p>ID: ${employee.getId()}</p>
+                <a href='mailto:${employee.getEmail()}'>Email: ${employee.getEmail()}</a>
                 <p>${employee.getSchool ? employee.getSchool() : employee.getGithub ? employee.getGithub() : employee.getOfficeNumber()}</p>
             </div>
         </li>

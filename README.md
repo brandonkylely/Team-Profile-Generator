@@ -28,6 +28,8 @@
 
   Type "node index" or "node ." in the command line to start the application. Answer the questions as presented for each team member. When asked if you would like to create another card, enter y to continue or n to stop the application and generate an html file for your team!
 
+  Video Demonstration: https://www.youtube.com/watch?v=jqHyIokLRcg
+
   ## Contribution
 
   N/a
